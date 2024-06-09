@@ -3,72 +3,63 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-# See https://setuptools.pypa.io/en/latest/userguide/quickstart.html for more project configuration options.
-name = "my-package"
+name = "atty"
 dynamic = ["version"]
 readme = "README.md"
+keywords = ["cli", "interactive", "console", "terminal", "alacritty"]
 classifiers = [
-    "Intended Audience :: Science/Research",
-    "Development Status :: 3 - Alpha",
-    "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 3",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT",
+  "Programming Language :: Python :: 3",
+  'Topic :: Terminals',
+  'Environment :: Console',
+  'Intended Audience :: Developers',
 ]
-authors = [
-    {name = "Allen Institute for Artificial Intelligence", email = "contact@allenai.org"}
-]
+authors = [{ name = "Michell Stuttgart", email = "michellstut@gmail.com" }]
 requires-python = ">=3.8"
-dependencies = [
-  # Add your own dependencies here
-]
-license = {file = "LICENSE"}
+dependencies = ["click", "beaupy", "tomli", "tomli_w"]
+
+license = { file = "LICENSE" }
 
 [project.urls]
-Homepage = "https://github.com/allenai/python-package-template"
-Repository = "https://github.com/allenai/python-package-template"
-Changelog = "https://github.com/allenai/python-package-template/blob/main/CHANGELOG.md"
-# Documentation = "https://my-package.readthedocs.io/"
+Homepage = "https://github.com/mstuttgart/atty"
+Repository = "https://github.com/mstuttgart/atty"
+Changelog = "https://github.com/mstuttgart/atty/blob/main/CHANGELOG.md"
+# Documentation = "https://atty.readthedocs.io/"
 
 [project.optional-dependencies]
 dev = [
-    "ruff",
-    "mypy>=1.0,<1.5",
-    "black>=23.0,<24.0",
-    "isort>=5.12,<5.13",
-    "pytest",
-    "pytest-sphinx",
-    "pytest-cov",
-    "twine>=1.11.0",
-    "build",
-    "setuptools",
-    "wheel",
-    "Sphinx>=4.3.0,<7.1.0",
-    "furo==2023.7.26",
-    "myst-parser>=1.0,<2.1",
-    "sphinx-copybutton==0.5.2",
-    "sphinx-autobuild==2021.3.14",
-    "sphinx-autodoc-typehints==1.23.3",
-    "packaging"
+  "ruff",
+  "mypy>=1.0,<1.5",
+  "black>=23.0,<24.0",
+  "isort>=5.12,<5.13",
+  "pytest",
+  "pytest-sphinx",
+  "pytest-cov",
+  "twine>=1.11.0",
+  "build",
+  "setuptools",
+  "wheel",
+  "Sphinx>=4.3.0,<7.1.0",
+  "furo==2023.7.26",
+  "myst-parser>=1.0,<2.1",
+  "sphinx-copybutton==0.5.2",
+  "sphinx-autobuild==2021.3.14",
+  "sphinx-autodoc-typehints==1.23.3",
+  "packaging",
 ]
 
 [tool.setuptools.packages.find]
-exclude = [
-    "*.tests",
-    "*.tests.*",
-    "tests.*",
-    "tests",
-    "docs*",
-    "scripts*"
-]
+exclude = ["*.tests", "*.tests.*", "tests.*", "tests", "docs*", "scripts*"]
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.package-data]
-my_package = ["py.typed"]
+atty = ["py.typed"]
 
 [tool.setuptools.dynamic]
-version = {attr = "my_package.version.VERSION"}
+version = { attr = "atty.version.VERSION" }
 
 [tool.black]
 line-length = 100
@@ -112,9 +103,6 @@ strict_optional = false
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
-python_classes = [
-  "Test*",
-  "*Test"
-]
+python_classes = ["Test*", "*Test"]
 log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 log_level = "DEBUG"
