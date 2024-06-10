@@ -1,4 +1,3 @@
-import glob
 import os
 from pathlib import Path
 
@@ -20,14 +19,10 @@ ATTY_FILE = f"{ALACRITTY_CONFIG_DIR}/atty.toml"
 
 def _get_theme_file_names():
 
-    themes = glob.glob(os.sep.join([f"{ALACRITTY_THEME_DIR}", "*.toml"]))
+    theme_path = Path(os.sep.join([str(Path.home()), f"{ALACRITTY_THEME_DIR}"]))
 
-    themes = [
-        "everforest_dark",
-        "everforest_light",
-        "rose-pine-dawn",
-        "rose-pine-moon",
-    ]
+    themes = [f.stem for f in theme_path.glob("*.toml")]
+    themes.sort()
 
     return themes
 
@@ -39,7 +34,6 @@ def _create_symlink(theme):
     atty_path = Path(atty_file)
 
     atty_path.unlink(missing_ok=True)
-
     atty_path.symlink_to(theme_path)
 
 
@@ -68,12 +62,17 @@ def _set_theme(theme):
 @click.version_option(VERSION, prog_name="atty")
 def cli():
     themes = _get_theme_file_names()
-    console.print("Select a theme")
+
+    msg = "Up and Down keys: navegate on themes list\nLeft and Right keys: switch page\nESC key: abort\n"
+
+    console.print(msg)
 
     # Choose one item from a list
-    theme = select(themes, cursor="🢧", cursor_style="cyan")
-    _set_theme(theme)
-    console.print(f'The theme "{theme}" has been applied successfully!')
+    theme = select(themes, pagination=True, page_size=10, cursor_style="cyan")
+
+    if theme:
+        _set_theme(theme)
+        console.print(f'The theme "{theme}" has been applied successfully!')
 
 
 if __name__ == "__main__":
