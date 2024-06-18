@@ -1,5 +1,5 @@
 import os
-from pathlib import Path
+import pathlib
 
 import click
 import rich
@@ -10,17 +10,17 @@ from beaupy import select
 from atty.version import VERSION
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
-ALACRITTY_CONFIG_DIR = Path(os.sep.join([str(Path.home()), ".config", "alacritty"]))
-ALACRITTY_CONFIG_FILE = Path(os.sep.join([str(ALACRITTY_CONFIG_DIR), "alacritty.toml"]))
-ALACRITTY_THEMES_DIR = Path(os.sep.join([str(ALACRITTY_CONFIG_DIR), "themes"]))
+
+ALACRITTY_CONFIG_DIR = pathlib.Path(os.sep.join([str(pathlib.Path.home()), ".config", "alacritty"]))
+ALACRITTY_CONFIG_FILE = pathlib.Path(os.sep.join([str(ALACRITTY_CONFIG_DIR), "alacritty.toml"]))
+ALACRITTY_THEMES_DIR = pathlib.Path(os.sep.join([str(ALACRITTY_CONFIG_DIR), "themes"]))
 
 
 console = rich.console.Console()
 
 
 def _get_theme_file_names(themes_path):
-
-    themes = [f.stem for f in Path(themes_path).glob("*.toml")]
+    themes = [f.stem for f in pathlib.Path(themes_path).glob("*.toml")]
     themes.sort()
 
     return themes
@@ -33,14 +33,13 @@ def _get_atty_symlink_path(config):
 def _create_symlink(config, themes_dir, theme_selected):
     theme_file = os.sep.join([str(themes_dir), f"{theme_selected}.toml"])
 
-    atty_path = Path(_get_atty_symlink_path(config))
+    atty_path = pathlib.Path(_get_atty_symlink_path(config))
 
     atty_path.unlink(missing_ok=True)
     atty_path.symlink_to(theme_file)
 
 
 def _update_config(config):
-
     alacritty_conf_file = str(config)
     alacritty_conf_file_content = {}
 
@@ -61,14 +60,10 @@ def _set_theme(config, themes_dir, theme_selected):
 
 
 def _theme_selection(config, themes_dir, theme):
-
     if not theme:
-
         themes_list = _get_theme_file_names(themes_dir)
 
-        msg = (
-            "Up and Down keys: navegate on themes list\nLeft and Right keys: switch page\nESC key: abort\nSelect Color:"
-        )
+        msg = "Up and Down keys: navegate on themes list\nLeft and Right keys: switch page\nESC key: abort\nSelect Color:"
 
         console.print(msg)
 
@@ -82,9 +77,18 @@ def _theme_selection(config, themes_dir, theme):
 
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.version_option(VERSION, prog_name="atty")
-@click.option("-c", "--config", default=ALACRITTY_CONFIG_FILE, help="Absolute path of Alacritty configuration file")
-@click.option("-d", "--theme_dir", default=ALACRITTY_THEMES_DIR, help="Absolute path of themes folder")
-@click.option("-t", "--theme", default=None, help="Select a theme by name instead of showing prompt.")
+@click.option(
+    "-c",
+    "--config",
+    default=ALACRITTY_CONFIG_FILE,
+    help="Absolute path of Alacritty configuration file",
+)
+@click.option(
+    "-d", "--theme_dir", default=ALACRITTY_THEMES_DIR, help="Absolute path of themes folder"
+)
+@click.option(
+    "-t", "--theme", default=None, help="Select a theme by name instead of showing prompt."
+)
 def atty(config, theme_dir, theme):
     """
     CLI for Alacritty color theme and configuration switching.
