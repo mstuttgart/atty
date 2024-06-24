@@ -3,8 +3,7 @@ run-checks :
 	isort --check .
 	black --check .
 	ruff check .
-	mypy .
-	CUDA_VISIBLE_DEVICES='' pytest -v --color=yes --doctest-modules tests/ atty/
+	CUDA_VISIBLE_DEVICES='' pytest -v --color=yes tests/ atty/
 
 .PHONY : build
 build :

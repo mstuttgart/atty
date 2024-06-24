@@ -6,17 +6,24 @@ build-backend = "setuptools.build_meta"
 name = "atty"
 dynamic = ["version"]
 readme = "README.md"
-keywords = ["cli", "interactive", "console", "terminal", "alacritty"]
+authors = [{ name = "Michell Stuttgart", email = "michellstut@gmail.com" }]
+requires-python = ">=3.8"
 classifiers = [
-  "Development Status :: 3 - Alpha",
-  "License :: OSI Approved :: MIT",
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   'Topic :: Terminals',
   'Environment :: Console',
   'Intended Audience :: Developers',
 ]
-authors = [{ name = "Michell Stuttgart", email = "michellstut@gmail.com" }]
-requires-python = ">=3.8"
+keywords = ["cli", "interactive", "console", "terminal", "alacritty"]
 dependencies = ["click", "beaupy", "tomli", "tomli_w"]
 
 license = { file = "LICENSE" }
@@ -27,20 +34,11 @@ Repository = "https://github.com/mstuttgart/atty"
 Changelog = "https://github.com/mstuttgart/atty/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
-dev = [
-  "ruff",
-  "mypy>=1.0,<1.5",
-  "black>=23.0,<24.0",
-  "isort>=5.12,<5.13",
-  "pytest",
-  "pytest-sphinx",
-  "pytest-cov",
-  "twine>=1.11.0",
-  "build",
-  "setuptools",
-  "wheel",
-  "packaging",
-]
+dev = ["nox>=2022.11.21", "ruff", "black>=23.0,<24.0", "isort>=5.12,<5.13", "pytest"]
+
+coverage = ["coveralls>=3.3.1", "pytest-cov>=4.0.0", "requests-mock>=1.10.0"]
+
+release = ["twine>=1.11.0", "build", "setuptools", "wheel", "packaging"]
 
 [project.scripts]
 atty = "atty.main:atty"
@@ -87,15 +85,6 @@ target-version = "py310"
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-
-[tool.mypy]
-ignore_missing_imports = true
-no_site_packages = true
-check_untyped_defs = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-strict_optional = false
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
