@@ -30,7 +30,8 @@
   <a href="#about">About</a> |
   <a href="#install">Install</a> |
   <a href="#how-to-use">How to Use</a> |
-  <a href="#configuration">Configuration</a>
+  <a href="#configuration">Configuration</a> |
+  <a href="#contribute">Contribute</a>
 </p>
 
 ## About
@@ -118,3 +119,8 @@ Options:
   -t, --theme TEXT      Select a theme by name instead of showing prompt.
   -h, --help            Show this message and exit.
 ```
+
+
+## Contribute
+
+See this *guideline* [here](https://github.com/mstuttgart/atty/blob/main/.github/CONTRIBUTING.md).
