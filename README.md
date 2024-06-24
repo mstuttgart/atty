@@ -17,10 +17,6 @@
   </a>
 
   <a href="https://pypi.org/project/atty">
-    <img src="https://img.shields.io/pypi/dm/atty?color=fcd800" alt="Downloads">
-  </a>
-
-  <a href="https://pypi.org/project/atty">
     <img src="https://img.shields.io/pypi/v/atty.svg?" alt="Ratings">
   </a>
 
