@@ -1,12 +1,7 @@
 ---
 name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 
-on:
-  push:
-    branches:
-      - main
-    tags:
-      - "v*.*.*"
+on: push
 
 jobs:
   build:
@@ -20,32 +15,15 @@ jobs:
         with:
           python-version: "3.*"
 
-      - name: Install requirements
-        run: |
-          pip install --upgrade pip setuptools wheel build
-          pip install -e .[dev]
-
-      - name: Prepare environment
-        run: |
-          echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - name: Install pypa/build
+        run: >-
+          python3 -m
+          pip install
+          build
+          --user
 
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
-
-      - name: Generate release notes
-        run: |
-          python scripts/release_notes.py > ${{ github.workspace }}-RELEASE_NOTES.md
-
-      - name: Publish GitHub release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          body_path: ${{ github.workspace }}-RELEASE_NOTES.md
-          prerelease: ${{ contains(env.TAG, 'rc') }}
-          files: |
-            dist/*
 
       - name: Store the distribution packages
         uses: actions/upload-artifact@v3
@@ -57,14 +35,15 @@ jobs:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
 
-    if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
+    # only publish to PyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/')
     needs:
       - build
     runs-on: ubuntu-latest
 
     environment:
       name: pypi
-      url: https://pypi.org/p/brazilcep
+      url: https://pypi.org/p/atty
 
     permissions:
       id-token: write
