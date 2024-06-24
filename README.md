@@ -8,8 +8,12 @@
 
 <p align="center">
 
-  <a href="https://github.com/mstuttgart/atty/actions/workflows/main.yml">
-    <img alt="GitHub Workflow Status" src="https://github.com/mstuttgart/atty/actions/workflows/main.yml/badge.svg">
+  <a href="https://github.com/mstuttgart/atty/actions/workflows/test.yml">
+    <img alt="GitHub Workflow Status" src="https://github.com/mstuttgart/atty/actions/workflows/test.yml/badge.svg">
+  </a>
+
+  <a href="https://codecov.io/gh/mstuttgart/atty">
+     <img alt="Codecov" src="https://img.shields.io/codecov/c/github/mstuttgart/atty?color=fcd800">
   </a>
 
   <a href="https://pypi.org/project/atty">
@@ -43,11 +47,12 @@
 
 ## Install
 
-The recommended way to get *atty* is to **install the latest stable release**:
+The recommended way to get _atty_ is to **install the latest stable release**:
 
 ```sh
 pip install atty
 ```
+
 or using [pipx](https://github.com/pypa/pipx):
 
 ```sh
@@ -69,11 +74,11 @@ Example:
 
 > [!TIP]
 > You can get the oficial themes repository of `alacritty`:
-> 
+>
 > `git clone git@github.com:alacritty/alacritty-theme.git $HOME/.config/alacritty/themes/`
 
-
 Next, run `atty` and select you favority theme:
+
 > atty
 
 ```sh
