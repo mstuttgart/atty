@@ -69,9 +69,7 @@ Example:
 ```
 
 > [!TIP]
-> You can get the oficial themes repository of `alacritty`:
->
-> `git clone git@github.com:alacritty/alacritty-theme.git $HOME/.config/alacritty/themes/`
+> You can get the oficial themes repository of `alacritty` [here](https://github.com/alacritty/alacritty-theme).
 
 Next, run `atty` and select you favority theme:
 
