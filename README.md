@@ -51,7 +51,7 @@
 The recommended way to get _atty_ is to **install the latest stable release**:
 
 ```sh
-pip install atty
+pip install atty --user
 ```
 
 or using [pipx](https://github.com/pypa/pipx):
